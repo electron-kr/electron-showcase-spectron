@@ -1,12 +1,18 @@
 # electron-spectron-boilerplate
 
-> My mind-blowing app
+> Show how to use spectron with ava on electron.
 
 
 ## Dev
 
 ```
 $ npm install
+```
+
+### Test with spectron
+
+```
+$ npm test
 ```
 
 ### Run

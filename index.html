@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Electron boilerplate</title>
+		<link rel="stylesheet" href="index.css">
+	</head>
+	<script type="text/javascript">
+		function compute(opr) {
+			console.log(opr);
+			var first = document.querySelector('#form input[name=first]').value;
+			var last = document.querySelector('#form input[name=last]').value;
+
+			document.querySelector('#form input[name=result]').value = eval(first + opr + last);
+		}
+	</script>
+	<body>
+		<div class="container">
+			<header>
+				<h1>Electron boilerplate</h1>
+			</header>
+			<section class="main">
+				<div id="form">
+					<div>
+						<input name="first" value="30">
+						<input name="last" value="10">
+						<input name="result" value="0">
+					</div>
+					<div>
+						<input type="button" name="add" value="Add" onclick="compute('+')">
+						<input type="button" name="sub" value="Sub" onclick="compute('-')">
+						<input type="button" name="multiple" value="Multiple" onclick="compute('*')">
+						<input type="button" name="divide" value="Divide" onclick="compute('/')">
+					</div>
+				</div>
+			</section>
+			<footer></footer>
+		</div>
+	</body>
+</html>
