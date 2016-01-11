@@ -2,39 +2,48 @@
 
 import test from 'ava';
 import {Application} from 'spectron';
-import path from 'path';
+import electronBin from 'electron-bin-path';
 
-let app;
+test.beforeEach(t => {
+	return electronBin().then(p => {
+		t.context.app = new Application({
+			args: [__dirname],
+			path: p
+		});
 
-function getElectronPath() {
-	let electronPath = path.join(__dirname, 'node_modules', '.bin', 'electron');
-	if (process.platform === 'win32') {
-		electronPath += '.cmd';
-	}
-	return electronPath;
-}
-
-test.beforeEach(() => {
-	app = new Application({
-		args: [__dirname],
-		path: getElectronPath()
+		return t.context.app.start();
 	});
-
-	return app.start();
 });
 
-test.afterEach(() => {
-	if (app && app.isRunning()) {
-		return app.stop();
-	}
-
-	return null;
+test.afterEach(t => {
+	return t.context.app.stop();
 });
 
-test('shows an initial window', async t => {
+test(t => {
+	const app = t.context.app;
+
+	return app.client.waitUntilWindowLoaded(10000)
+		.getWindowCount().then(count => {
+			t.is(count, 1);
+		}).isWindowMinimized().then(min => {
+			t.false(min);
+		}).isWindowDevToolsOpened().then(opened => {
+			t.false(opened);
+		}).isWindowVisible().then(visible => {
+			t.true(visible);
+		}).isWindowFocused().then(focused => {
+			t.true(focused);
+		}).getWindowWidth().then(width => {
+			t.ok(width > 0);
+		}).getWindowHeight().then(height => {
+			t.ok(height > 0);
+		});
+});
+
+test(async t => {
+	const app = t.context.app;
+
 	await app.client.waitUntilWindowLoaded(10000);
-	t.is(1, await app.client.getWindowCount());
-	t.is(false, await app.client.isWindowMinimized());
 	t.is('30', await app.client.getValue('#form input[name=first]'));
 	t.is('10', await app.client.getValue('#form input[name=last]'));
 

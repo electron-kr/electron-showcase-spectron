@@ -1,10 +1,10 @@
 {
-  "name": "electron-spectron-boilerplate",
-  "productName": "ElectronSpectronBoilerplate",
+  "name": "electron-spectron-showcase",
+  "productName": "ElectronTestWithSpectron",
   "version": "0.0.0",
-  "description": "Show how to use spectron with ava on electron",
+  "description": "Show how to use spectron with ava on electron for testing",
   "license": "MIT",
-  "repository": "ragingwind/electron-spectron-boilerplate",
+  "repository": "ragingwind/electron-spectron-showcase",
   "author": {
     "name": "ragingwind",
     "email": "ragingwind@gmail.com",
@@ -12,7 +12,7 @@
   },
   "electronVersion": "0.36.0",
   "scripts": {
-    "test": "xo && ava",
+    "test": "xo && ava --serial",
     "test2": "mocha test-mocha.js",
     "start": "electron .",
     "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --platform=darwin --arch=x64 --version=$npm_package_electronVersion"
@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "ava": "^0.9.1",
+    "electron-bin-path": "^0.1.0",
     "electron-packager": "^5.0.0",
     "electron-prebuilt": "^0.36.0",
     "spectron": "^0.36.0",
