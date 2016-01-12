@@ -13,7 +13,6 @@
   "electronVersion": "0.36.0",
   "scripts": {
     "test": "xo && ava --serial",
-    "test2": "mocha test-mocha.js",
     "start": "electron .",
     "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --platform=darwin --arch=x64 --version=$npm_package_electronVersion"
   },
