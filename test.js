@@ -44,6 +44,19 @@ test(async t => {
 	const app = t.context.app;
 
 	await app.client.waitUntilWindowLoaded(10000);
+	t.is(1, await app.client.getWindowCount());
+	t.false(await app.client.isWindowMinimized());
+	t.false(await app.client.isWindowDevToolsOpened());
+	t.true(await app.client.isWindowVisible());
+	t.true(await app.client.isWindowFocused());
+	t.ok(await app.client.getWindowWidth() > 0);
+	t.ok(await app.client.getWindowHeight() > 0);
+});
+
+test(async t => {
+	const app = t.context.app;
+
+	await app.client.waitUntilWindowLoaded(10000);
 	t.is('30', await app.client.getValue('#form input[name=first]'));
 	t.is('10', await app.client.getValue('#form input[name=last]'));
 
