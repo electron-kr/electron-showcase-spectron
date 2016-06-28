@@ -1,10 +1,10 @@
 {
-  "name": "electron-spectron-showcase",
-  "productName": "ElectronTestWithSpectron",
+  "name": "electron-showcase-spectron",
+  "productName": "ElectronShowcaseForSpectron",
   "version": "0.0.0",
   "description": "Show how to use spectron with ava on electron for testing",
   "license": "MIT",
-  "repository": "ragingwind/electron-spectron-showcase",
+  "repository": "electron-kr/electron-showcase-spectron",
   "author": {
     "name": "ragingwind",
     "email": "ragingwind@gmail.com",
