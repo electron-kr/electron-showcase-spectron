@@ -19,44 +19,46 @@ test.afterEach(t => {
 	return t.context.app.stop();
 });
 
-test(t => {
+test('Measure BrowserWindow status', t => {
 	const app = t.context.app;
 
-	return app.client.waitUntilWindowLoaded(10000)
+	return app.client.waitUntilWindowLoaded()
 		.getWindowCount().then(count => {
 			t.is(count, 1);
-		}).isWindowMinimized().then(min => {
+		}).browserWindow.isMinimized().then(min => {
 			t.false(min);
-		}).isWindowDevToolsOpened().then(opened => {
+		}).browserWindow.isDevToolsOpened().then(opened => {
 			t.false(opened);
-		}).isWindowVisible().then(visible => {
+		}).browserWindow.isVisible().then(visible => {
 			t.true(visible);
-		}).isWindowFocused().then(focused => {
+		}).browserWindow.isFocused().then(focused => {
 			t.true(focused);
-		}).getWindowWidth().then(width => {
-			t.ok(width > 0);
-		}).getWindowHeight().then(height => {
-			t.ok(height > 0);
+		}).browserWindow.getBounds().then(bounds => {
+			t.true(bounds.width > 0);
+			t.true(bounds.height > 0);
 		});
 });
 
-test(async t => {
+test('Measure BrowserWindow status with await', async t => {
 	const app = t.context.app;
+	await app.client.waitUntilWindowLoaded();
+	const win = app.browserWindow;
 
-	await app.client.waitUntilWindowLoaded(10000);
 	t.is(1, await app.client.getWindowCount());
-	t.false(await app.client.isWindowMinimized());
-	t.false(await app.client.isWindowDevToolsOpened());
-	t.true(await app.client.isWindowVisible());
-	t.true(await app.client.isWindowFocused());
-	t.ok(await app.client.getWindowWidth() > 0);
-	t.ok(await app.client.getWindowHeight() > 0);
+	t.false(await win.isMinimized());
+	t.false(await win.isDevToolsOpened());
+	t.true(await win.isVisible());
+	t.true(await win.isFocused());
+
+	const {width, height} = await win.getBounds();
+	t.true(width > 0);
+	t.true(height > 0);
 });
 
-test(async t => {
+test('Determine values of input', async t => {
 	const app = t.context.app;
 
-	await app.client.waitUntilWindowLoaded(10000);
+	await app.client.waitUntilWindowLoaded();
 	t.is('30', await app.client.getValue('#form input[name=first]'));
 	t.is('10', await app.client.getValue('#form input[name=last]'));
 

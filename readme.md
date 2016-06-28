@@ -4,6 +4,11 @@
 
 > Show how to use [spectron](https://github.com/kevinsawicki/spectron) with [ava](https://github.com/sindresorhus/ava) on electron for testing
 
+## Requisites
+
+```
+$ npm install --save-dev ava spectron
+```
 
 ## Dev
 
@@ -34,4 +39,4 @@ Builds the app for OS X, Linux, and Windows, using [electron-packager](https://g
 
 ## License
 
-MIT © [ragingwind](http://ragingwind.me)
+MIT © [Jimmy Moon](http://ragingwind.me)

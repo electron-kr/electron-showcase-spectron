@@ -10,11 +10,10 @@
     "email": "ragingwind@gmail.com",
     "url": "ragingwind.me"
   },
-  "electronVersion": "0.36.0",
   "scripts": {
     "test": "xo && ava --serial",
     "start": "electron .",
-    "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --platform=darwin --arch=x64 --version=$npm_package_electronVersion"
+    "build": "electron-packager . --out=dist --app-version=$npm_package_version --prune --asar --overwrite --all"
   },
   "files": [
     "index.js",
@@ -26,15 +25,16 @@
     "electron"
   ],
   "dependencies": {
-    "electron-debug": "^0.5.0"
+    "electron-debug": "^1.0.0"
   },
   "devDependencies": {
-    "ava": "^0.9.1",
+    "ava": "^0.15.2",
+    "devtron": "^1.1.0",
     "electron-bin-path": "^0.1.0",
-    "electron-packager": "^5.0.0",
-    "electron-prebuilt": "^0.36.0",
-    "spectron": "^0.36.0",
-    "xo": "^0.12.1"
+    "electron-packager": "^7.0.0",
+    "electron-prebuilt": "^1.0.1",
+    "spectron": "^3.2.3",
+    "xo": "^0.15.0"
   },
   "xo": {
     "esnext": true,
